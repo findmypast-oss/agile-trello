@@ -1,0 +1,18 @@
+{
+  "name": "Agile Trello",
+  "short_name": "Agile Trello",
+  "version": "1.0",
+  "description": "All the handy Trello plugins in one",
+  "manifest_version": 2,
+  "permissions": ["tabs", "https://trello.com/*", "storage", "activeTab"],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://trello.com/*"],
+      "js": ["agile-trello.js"]
+    }
+  ]
+}
