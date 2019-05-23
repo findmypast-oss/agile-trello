@@ -1,12 +1,10 @@
-window.addEventListener("load", function() {});
-
 document.onreadystatechange = function() {
   if (document.readyState === "complete") {
-    setTimeout(cardTotal, 7000);
+    setTimeout(cardTotalForColumns, 7000); // hacks -> wait for all columns to load
   }
 };
 
-function cardTotal() {
+function cardTotalForColumns() {
   const columns = document.querySelectorAll(".list.js-list-content");
   columns.forEach(function(node) {
     const cardsContainer = node.getElementsByClassName("list-cards")[0];
