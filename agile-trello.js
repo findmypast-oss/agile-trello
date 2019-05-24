@@ -1,5 +1,11 @@
+const baseUrl = "https://api.trello.com";
+const token = ""; // see https://trello.com/app-key
+const apiKey = "";
+const authTokenParams = `key=${apiKey}&token=${token}`;
+
 document.onreadystatechange = function() {
   if (document.readyState === "complete") {
+    setTimeout(cardAge, 1000);
     setTimeout(cardTotalForColumns, 7000); // hacks -> wait for all columns to load
   }
 };
@@ -86,5 +92,29 @@ function cardTotalForColumns() {
       }),
       cardsContainer
     );
+  });
+}
+
+async function cardAge() {
+  const cards = document.querySelectorAll(".list-card");
+  //TODO get the board id from the url
+  const response = await fetch(
+    baseUrl + "/1/boards/QPquSDva/cards?" + authTokenParams
+  );
+  const cardData = await response.json();
+  const cardDataById = [];
+  cardData.map(card => (cardDataById[card.shortLink] = card));
+  cards.forEach(card => {
+    const id = /https:\/\/trello.com\/c\/([A-Za-z0-9]+)\/\S+/.exec(
+      card.href
+    )[1];
+
+    const colInfo = document.createElement("span");
+    colInfo.setAttribute(
+      "style",
+      "text-align:right;font-size: 12px;margin-right:10px;"
+    );
+    colInfo.innerText = "Last Activity: " + cardDataById[id].dateLastActivity;
+    card.append(colInfo);
   });
 }
