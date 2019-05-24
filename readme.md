@@ -12,9 +12,10 @@ A Chrome extension which provides all the Scrum/Kanban tools
 
 > Add more things to the list
 
-- [x] Total card count per column
+- [x] Total card count per column (Richard)
 - [x] Total story points per column (Richard)
-- [ ] Points adder for each card (Fib numbers)
+- [ ] Changes to the page (Richard)
+- [ ] Points adder for each card _Fib numbers_
 - [ ] Story limit per column
 - [ ] Show card id
 - [ ] Age of card from when it was moved/created (Steffi)
