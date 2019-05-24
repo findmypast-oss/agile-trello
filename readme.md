@@ -8,6 +8,11 @@ A Chrome extension which provides all the Scrum/Kanban tools
 
 - Main file is `agile-trello.js`
 
+## Dynamic importing
+
+- Add new file to manifest.json in `web_accessible_resources`
+- Import using `import { nameOfFunc } from './random-file.js'` **important of end with file extension**
+
 ## Features:
 
 > Add more things to the list
@@ -19,4 +24,4 @@ A Chrome extension which provides all the Scrum/Kanban tools
 - [ ] Story limit per column
 - [ ] Show card id
 - [ ] Age of card from when it was moved/created (Steffi)
-- [ ] Working in one file might get tricky, maybe add a bundler or another approach?
+- [ ] Working in one file might get tricky, maybe add a bundler or another approach? (Richard)

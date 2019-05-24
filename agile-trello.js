@@ -1,3 +1,4 @@
+import { trelloUi } from "./trello-ui.js";
 const baseUrl = "https://api.trello.com";
 const token = ""; //see https://trello.com/app-key
 const apiKey = "";
@@ -7,20 +8,6 @@ document.onreadystatechange = function() {
   if (document.readyState === "complete") {
     setTimeout(cardAge, 2000);
     setTimeout(cardTotalForColumns, 7000); // hacks -> wait for all columns to load
-  }
-};
-
-const trelloUi = {
-  getColumns() {
-    return document.querySelectorAll(".list.js-list-content");
-  },
-  getCardsInColumn(column) {
-    const cards = column.getElementsByClassName("list-cards");
-    if (cards.length > 0) return cards[0].childNodes;
-    return [];
-  },
-  getCardTitle(card) {
-    return card.getElementsByClassName("list-card-title")[0].innerText;
   }
 };
 
