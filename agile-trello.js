@@ -1,11 +1,11 @@
 const baseUrl = "https://api.trello.com";
-const token = ""; // see https://trello.com/app-key
+const token = ""; //see https://trello.com/app-key
 const apiKey = "";
 const authTokenParams = `key=${apiKey}&token=${token}`;
 
 document.onreadystatechange = function() {
   if (document.readyState === "complete") {
-    setTimeout(cardAge, 1000);
+    setTimeout(cardAge, 2000);
     setTimeout(cardTotalForColumns, 7000); // hacks -> wait for all columns to load
   }
 };
@@ -114,7 +114,16 @@ async function cardAge() {
       "style",
       "text-align:right;font-size: 12px;margin-right:10px;"
     );
-    colInfo.innerText = "Last Activity: " + cardDataById[id].dateLastActivity;
+    colInfo.innerText =
+      "Last changed: " +
+      daysBetween(new Date(cardDataById[id].dateLastActivity), new Date()) +
+      " days ago";
     card.append(colInfo);
   });
+
+  function daysBetween(date1, date2) {
+    var oneDay = 1000 * 60 * 60 * 24;
+    var diff = date2.getTime() - date1.getTime();
+    return Math.round(diff / oneDay);
+  }
 }
