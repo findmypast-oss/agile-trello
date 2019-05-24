@@ -1,4 +1,4 @@
-import { trelloUi } from "./trello-ui.js";
+import { cardTotalForColumns, totalPoints, totalsView } from "./card-totals.js";
 const baseUrl = "https://api.trello.com";
 const token = ""; //see https://trello.com/app-key
 const apiKey = "";
@@ -8,16 +8,9 @@ document.onreadystatechange = function() {
   if (document.readyState === "complete") {
     setTimeout(cardAge, 2000);
     setTimeout(cardTotalForColumns, 7000); // hacks -> wait for all columns to load
+    setTimeout(observeDomChanges, 7000);
   }
 };
-
-const STORY_POINTS_REGEX = /^\((\d+)\)/;
-
-function extractPoints(title) {
-  const points = title.match(STORY_POINTS_REGEX);
-  if (points) return Number(points[1]);
-  return 0;
-}
 
 function observeDomChanges() {
   let mutationObserver = new MutationObserver(function(mutations) {
@@ -29,7 +22,7 @@ function observeDomChanges() {
           "agile-trello-col-totals"
         )[0];
         const points = totalPoints(column);
-        totalsNode.innerText = updateColumnTotals({
+        totalsNode.innerText = totalsView({
           points,
           cardTotal: mutation.target.childNodes.length
         }).innerText;
@@ -44,41 +37,6 @@ function observeDomChanges() {
     subtree: true,
     attributeOldValue: false,
     characterDataOldValue: false
-  });
-}
-
-function updateColumnTotals({ points, cardTotal }) {
-  const colInfo = document.createElement("span");
-  colInfo.setAttribute("class", "agile-trello-col-totals");
-  colInfo.setAttribute(
-    "style",
-    "text-align:right;font-size: 12px;margin-right:10px;"
-  );
-  colInfo.innerText = "P: " + points + " T: " + cardTotal;
-  return colInfo;
-}
-
-function totalPoints(node) {
-  let points = 0;
-  trelloUi.getCardsInColumn(node).forEach(function(node) {
-    points += extractPoints(trelloUi.getCardTitle(node));
-  });
-  return points;
-}
-
-function cardTotalForColumns() {
-  observeDomChanges();
-  const columns = trelloUi.getColumns();
-  columns.forEach(function(node) {
-    const cardsContainer = node.getElementsByClassName("list-cards")[0];
-    let points = totalPoints(node);
-    node.insertBefore(
-      updateColumnTotals({
-        points,
-        cardTotal: cardsContainer.childNodes.length
-      }),
-      cardsContainer
-    );
   });
 }
 

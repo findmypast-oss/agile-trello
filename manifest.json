@@ -15,5 +15,9 @@
       "js": ["agile-trello-setup.js"]
     }
   ],
-  "web_accessible_resources": ["trello-ui.js", "agile-trello.js"]
+  "web_accessible_resources": [
+    "trello-ui.js",
+    "agile-trello.js",
+    "card-totals.js"
+  ]
 }
