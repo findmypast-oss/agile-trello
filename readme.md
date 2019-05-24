@@ -13,8 +13,9 @@ A Chrome extension which provides all the Scrum/Kanban tools
 > Add more things to the list
 
 - [x] Total card count per column
-- [ ] Total story points per column (Richard)
+- [x] Total story points per column (Richard)
 - [ ] Points adder for each card (Fib numbers)
 - [ ] Story limit per column
 - [ ] Show card id
 - [ ] Age of card from when it was moved/created (Steffi)
+- [ ] Working in one file might get tricky, maybe add a bundler or another approach?
