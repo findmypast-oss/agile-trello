@@ -8,6 +8,8 @@ export const trelloUi = {
     return [];
   },
   getCardTitle(card) {
-    return card.getElementsByClassName("list-card-title")[0].innerText;
+    const titleNodes = card.getElementsByClassName("list-card-title");
+    if (titleNodes.length > 0) return titleNodes[0].innerText;
+    return "";
   }
 };

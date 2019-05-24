@@ -1,4 +1,4 @@
-import { cardTotalForColumns, totalPoints, totalsView } from "./card-totals.js";
+import { cardTotalForColumns, updateCardTotals } from "./card-totals.js";
 const baseUrl = "https://api.trello.com";
 const token = ""; //see https://trello.com/app-key
 const apiKey = "";
@@ -15,20 +15,10 @@ document.onreadystatechange = function() {
 function observeDomChanges() {
   let mutationObserver = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
-      if (mutation.target.className.includes("js-list-cards")) {
-        // console.log(mutation);
-        const column = mutation.target.parentNode;
-        const totalsNode = column.getElementsByClassName(
-          "agile-trello-col-totals"
-        )[0];
-        const points = totalPoints(column);
-        totalsNode.innerText = totalsView({
-          points,
-          cardTotal: mutation.target.childNodes.length
-        }).innerText;
-      }
+      updateCardTotals(mutation.target);
     });
   });
+
   const board = document.getElementsByClassName("board-main-content")[0];
   mutationObserver.observe(board, {
     attributes: false,
