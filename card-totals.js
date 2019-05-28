@@ -1,44 +1,44 @@
-import { trelloUi } from './trello-ui.js';
+import { trelloUi } from "./trello-ui.js";
 
-export function cardTotalForColumns() {
-  const columns = trelloUi.getColumns();
-  columns.forEach(function(node) {
-    const cardsContainer = node.getElementsByClassName('list-cards')[0];
-    let points = totalPoints(node);
-    node.insertBefore(
-      totalsView({
-        points,
-        cardTotal: cardsContainer.childNodes.length
-      }),
-      cardsContainer
-    );
-  });
+export function updateCardTotals(changedElements) {
+  if (changedElements.classList.contains("js-list-cards")) {
+    // change to column
+    const cardContainer = changedElements;
+    const column = cardContainer.parentNode;
+    updateTotalColumnViews(column, cardContainer);
+  }
+  if (changedElements.classList.contains("list-card")) {
+    // change to card
+    const cardContainer = changedElements.parentNode;
+    const column = cardContainer.parentNode;
+    updateTotalColumnViews(column, cardContainer);
+  }
 }
 
-export function updateCardTotals(cardContainer) {
-  if (cardContainer.className.includes('js-list-cards')) {
-    // console.log(mutation);
-    const column = cardContainer.parentNode;
-    const totalsNode = column.getElementsByClassName(
-      'agile-trello-col-totals'
-    )[0];
-
-    const points = totalPoints(column);
-    totalsNode.innerText = totalsView({
-      points,
-      cardTotal: cardContainer.childNodes.length
-    }).innerText;
+function updateTotalColumnViews(column, cardContainer) {
+  const totalsNode = column.getElementsByClassName(
+    "agile-trello-col-totals"
+  )[0];
+  const points = totalPoints(column);
+  const newTotalsNode = totalsView({
+    points,
+    cardTotal: cardContainer.childNodes.length
+  });
+  if (totalsNode) {
+    totalsNode.innerText = newTotalsNode.innerText;
+  } else {
+    column.insertBefore(newTotalsNode, cardContainer);
   }
 }
 
 function totalsView({ points, cardTotal }) {
-  const colInfo = document.createElement('span');
-  colInfo.setAttribute('class', 'agile-trello-col-totals');
+  const colInfo = document.createElement("span");
+  colInfo.setAttribute("class", "agile-trello-col-totals");
   colInfo.setAttribute(
-    'style',
-    'text-align:right;font-size: 12px;margin-right:10px;'
+    "style",
+    "text-align:right;font-size: 12px;margin-right:10px;"
   );
-  colInfo.innerText = 'P: ' + points + ' C: ' + cardTotal;
+  colInfo.innerText = "P: " + points + " C: " + cardTotal;
   return colInfo;
 }
 
@@ -59,29 +59,33 @@ function extractPoints(title) {
 }
 
 function updateCardPoints({ points }) {
-  const cardInfo = document.createElement('span');
-  cardInfo.setAttribute('class', 'agile-trello-card-points');
-  cardInfo.setAttribute(
-    'style',
-    'text-align:right;font-size: 12px;margin-right:10px;'
-  );
-  cardInfo.innerText = 'P: ' + points;
-  return cardInfo;
+  const badgeInfo = document.createElement("div");
+  badgeInfo.setAttribute("class", "badge");
+  badgeInfo.setAttribute("title", "Storypoints");
+  const storyPoints = document.createElement("span");
+  storyPoints.setAttribute("class", "agile-trello-card-points badge-text");
+  storyPoints.setAttribute("style", "font-size: 12px;");
+  storyPoints.innerText = "P: " + points;
+  badgeInfo.appendChild(storyPoints);
+  return badgeInfo;
 }
 
-export function estimatePointsForCards() {
-  const cards = trelloUi.getAllCards();
-  cards.forEach(function(card) {
-    const cardBadgesContainer = card.getElementsByClassName(
-      'list-card-details'
+export function estimatePointsForCards(changedElements) {
+  if (changedElements.classList.contains("list-card")) {
+    const card = changedElements;
+    const cardPointsElement = card.getElementsByClassName(
+      "agile-trello-card-points"
     )[0];
-    const points = extractPoints(trelloUi.getCardTitle(card));
 
-    card.insertBefore(
-      updateCardPoints({
-        points
-      }),
-      cardBadgesContainer
-    );
-  });
+    const points = extractPoints(trelloUi.getCardTitle(card));
+    const newCardPoints = updateCardPoints({
+      points
+    });
+
+    if (cardPointsElement) {
+      cardPointsElement.innerText = newCardPoints.innerText;
+    } else {
+      card.getElementsByClassName("js-badges")[0].append(newCardPoints);
+    }
+  }
 }
