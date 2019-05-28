@@ -7,7 +7,6 @@ const authTokenParams = `key=${apiKey}&token=${token}`;
 document.onreadystatechange = function() {
   if (document.readyState === "complete") {
     setTimeout(cardAge, 2000);
-    setTimeout(estimatePointsForCards, 7000);
   }
 };
 
@@ -16,6 +15,7 @@ function setupBoardObserver() {
   const mutationObserver = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
       updateCardTotals(mutation.target);
+      estimatePointsForCards(mutation.target);
     });
   });
   return function observeDomChanges() {
