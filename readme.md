@@ -21,7 +21,9 @@ A Chrome extension which provides all the Scrum/Kanban tools
 - [x] Total story points per column (Richard)
 - [x] Implement dynamic importing of js modules (Richard)
 - [x] Implement an observer for when cards move (Richard)
-- [x] Points adder for each card _Fib numbers_ (Toby)
+- [x] Display points on card (Toby)
+- [ ] Logo/icon for extension (Laura)
+- [ ] List of buttons story points (_Fib numbers_) in open card view to add
 - [ ] Story limit per column
 - [ ] Show card id
 - [ ] Age of card from when it was moved/created (Steffi)
