@@ -5,9 +5,14 @@ const authTokenParams = `key=${apiKey}&token=${token}`;
 
 export const trelloApi = {
   async getAllCards(boardId) {
-    const response = await fetch(
-      `${baseUrl}/1/boards/${boardId}/cards?${authTokenParams}`
-    );
-    return await response.json();
+    if (token !== "" && apiKey !== "") {
+      const response = await fetch(
+        `${baseUrl}/1/boards/${boardId}/cards?${authTokenParams}`
+      );
+      if (response.status === 200) {
+        return await response.json();
+      }
+    }
+    return [];
   }
 };
