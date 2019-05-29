@@ -12,7 +12,7 @@ setupBoardObserver()();
 function setupBoardObserver() {
   const mutationObserver = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
-      updateCardId(mutation.target);
+      // updateCardId(mutation.target);
       updateCardTotals(mutation.target);
       estimatePointsForCards(mutation.target);
     });
