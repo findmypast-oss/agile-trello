@@ -3,15 +3,13 @@ import { trelloApi } from "./trello-api.js";
 
 export async function cardAge() {
   const cards = trelloUi.getAllCards();
-  //TODO get the board id from the url
-  const cardData = await trelloApi.getAllCards("RSElvewB");
+  const boardId = getBoardIdFromUrl(window.location.toString());
+  const cardData = await trelloApi.getAllCards(boardId);
   const cardDataById = [];
   if (cardData.length > 0) {
     cardData.map(card => (cardDataById[card.shortLink] = card));
     cards.forEach(card => {
-      const id = /https:\/\/trello.com\/c\/([A-Za-z0-9]+)\/\S+/.exec(
-        card.href
-      )[1];
+      const id = getCardIdFromUrl(card.href);
 
       const colInfo = document.createElement("span");
       colInfo.setAttribute(
@@ -25,6 +23,14 @@ export async function cardAge() {
       card.append(colInfo);
     });
   }
+}
+
+function getBoardIdFromUrl(url) {
+  return /https:\/\/trello.com\/b\/([A-Za-z0-9]+)\/\S+/.exec(url)[1];
+}
+
+function getCardIdFromUrl(url) {
+  return /https:\/\/trello.com\/c\/([A-Za-z0-9]+)\/\S+/.exec(url)[1];
 }
 
 function daysBetween(date1, date2) {
