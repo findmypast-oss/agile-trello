@@ -1,8 +1,5 @@
 import { updateCardTotals, estimatePointsForCards } from "./card-totals.js";
-const baseUrl = "https://api.trello.com";
-const token = ""; //see https://trello.com/app-key
-const apiKey = "";
-const authTokenParams = `key=${apiKey}&token=${token}`;
+import { cardAge } from "./card-age.js";
 
 document.onreadystatechange = function() {
   if (document.readyState === "complete") {
