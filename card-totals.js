@@ -61,13 +61,9 @@ function extractPoints(title) {
 function updateCardPoints({ points }) {
   const badgeInfo = document.createElement("div");
   badgeInfo.setAttribute("class", "badge");
-  badgeInfo.setAttribute("title", "Storypoints");
+  badgeInfo.setAttribute("title", "Story points");
   const storyPoints = document.createElement("span");
   storyPoints.setAttribute("class", "agile-trello-card-points badge-text");
-  storyPoints.setAttribute(
-    "style",
-    "background-color: #f03c02;border-radius: 50%;color: white;display: inline-block;font-size: 12px;height: 17px;line-height: 17px;margin-bottom:3px;padding: 0px;text-align:center;vertical-align: middle;width: 17px;"
-  );
   storyPoints.innerText = points;
   badgeInfo.appendChild(storyPoints);
   return badgeInfo;

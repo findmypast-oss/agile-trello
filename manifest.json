@@ -27,6 +27,7 @@
   "content_scripts": [
     {
       "matches": ["*://trello.com/*"],
+      "css": ["agile-trello.css"],
       "js": ["agile-trello-setup.js"]
     }
   ],
