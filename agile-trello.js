@@ -53,7 +53,7 @@ async function cardAge() {
       const colInfo = document.createElement("span");
       colInfo.setAttribute(
         "style",
-        "text-align:right;font-size: 12px;margin-right:10px;"
+        "text-align:right;font-size:11px;margin-right:10px;"
       );
       colInfo.innerText =
         "Last changed: " +

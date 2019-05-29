@@ -36,9 +36,9 @@ function totalsView({ points, cardTotal }) {
   colInfo.setAttribute("class", "agile-trello-col-totals");
   colInfo.setAttribute(
     "style",
-    "text-align:right;font-size: 12px;margin-right:10px;"
+    "font-size:11px;font-weight:bold;margin-right:10px;text-align:right;"
   );
-  colInfo.innerText = "P: " + points + " C: " + cardTotal;
+  colInfo.innerText = points + " points / " + cardTotal + " tickets";
   return colInfo;
 }
 
@@ -64,8 +64,11 @@ function updateCardPoints({ points }) {
   badgeInfo.setAttribute("title", "Storypoints");
   const storyPoints = document.createElement("span");
   storyPoints.setAttribute("class", "agile-trello-card-points badge-text");
-  storyPoints.setAttribute("style", "font-size: 12px;");
-  storyPoints.innerText = "P: " + points;
+  storyPoints.setAttribute(
+    "style",
+    "background-color: #f03c02;border-radius: 50%;color: white;display: inline-block;font-size: 12px;height: 17px;line-height: 17px;margin-bottom:3px;padding: 0px;text-align:center;vertical-align: middle;width: 17px;"
+  );
+  storyPoints.innerText = points;
   badgeInfo.appendChild(storyPoints);
   return badgeInfo;
 }
