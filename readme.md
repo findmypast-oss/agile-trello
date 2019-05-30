@@ -41,3 +41,9 @@ See https://trello.com/app-key on how to get your token and api key. As they are
 
 - [ ] List of buttons story points (_Fib numbers_)
 - [ ] Show card number near title
+
+### Build tools
+
+To publish on the chrome extension store a zip file of the app needs to be uploaded. Read more about [publishing](https://developer.chrome.com/webstore/publish)
+
+- [ ] Create a script to zip files for upload to chrome store maybe use [ADM-ZIP](https://www.npmjs.com/package/adm-zip)
