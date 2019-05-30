@@ -68,19 +68,22 @@ function updateCardPoints({ points }) {
 export function estimatePointsForCards(changedElements) {
   if (changedElements.classList.contains("list-card")) {
     const card = changedElements;
+    const points = extractPoints(trelloUi.getCardTitle(card));
     const cardPointsElement = card.getElementsByClassName(
       "agile-trello-card-points"
     )[0];
+    if (points > 0) {
+      const newCardPoints = updateCardPoints({
+        points
+      });
 
-    const points = extractPoints(trelloUi.getCardTitle(card));
-    const newCardPoints = updateCardPoints({
-      points
-    });
-
-    if (cardPointsElement) {
-      cardPointsElement.innerText = newCardPoints.innerText;
-    } else {
-      card.getElementsByClassName("js-badges")[0].append(newCardPoints);
+      if (cardPointsElement) {
+        cardPointsElement.innerText = newCardPoints.innerText;
+      } else {
+        card.getElementsByClassName("js-badges")[0].append(newCardPoints);
+      }
+    } else if (cardPointsElement) {
+      cardPointsElement.parentNode.removeChild(cardPointsElement);
     }
   }
 }
