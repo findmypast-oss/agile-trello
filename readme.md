@@ -27,11 +27,11 @@ See https://trello.com/app-key on how to get your token and api key. As they are
 - [x] Total story points per column (Richard)
 - [x] Implement dynamic importing of js modules (Richard)
 - [x] Implement an observer for when cards move (Richard)
-- [ ] Display points on card (Toby) <- still needs to hide the points in the title.
 - [x] Logo/icon for extension (Laura)
+- [x] Show card id (Richard and Laura)
+- [ ] Display points on card <- still needs to hide the points in the title. (Toby)
 - [ ] List of buttons story points (_Fib numbers_) in open card view to add
 - [ ] Story limit per column
-- [ ] Show card id (Richard and Laura)
 - [ ] Age of card from when it was moved/created (Steffi)
-- [ ] When a story point has changed on a card update all the totals (column and card points)
-- [ ] When changing the board the Agile trello stats are not visible/created
+- [ ] When a story point has changed on a card update all the totals (column and card points) (Richard)
+- [ ] When changing to another board the Agile Trello stats are not visible/created
