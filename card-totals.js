@@ -34,7 +34,9 @@ function updateTotalColumnViews(column, cardContainer) {
 function totalsView({ points, cardTotal }) {
   const colInfo = document.createElement("span");
   colInfo.setAttribute("class", "agile-trello-col-totals");
-  colInfo.innerText = points + " points / " + cardTotal + " tickets";
+  let pointsWord = points === 1 ? " point" : " points";
+  let cardTotalWord = cardTotal === 1 ? " ticket" : " tickets";
+  colInfo.innerText = points + pointsWord + " / " + cardTotal + cardTotalWord;
   return colInfo;
 }
 
