@@ -2,12 +2,14 @@ import { trelloUi, trelloUrl } from "./trello-ui.js";
 import { trelloApi } from "./trello-api.js";
 
 export async function cardAge() {
-  const cards = trelloUi.getAllCards();
   const boardId = trelloUrl.getBoardId(window.location.toString());
   const cardData = await trelloApi.getAllCards(boardId);
-  const cardDataById = [];
+
   if (cardData.length > 0) {
+    const cards = trelloUi.getAllCards();
+    const cardDataById = [];
     cardData.map(card => (cardDataById[card.shortLink] = card));
+
     cards.forEach(card => {
       const id = trelloUrl.getCardId(card.href);
 
