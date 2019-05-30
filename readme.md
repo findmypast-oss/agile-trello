@@ -8,6 +8,12 @@ A Chrome extension which provides all the Scrum/Kanban tools
 
 - Main file is `agile-trello.js`
 
+## API Key and Token
+
+Some features require access to the Trello API, for this a Trello token and API key are required. Add them to the file `trello-api.js`.
+
+See https://trello.com/app-key on how to get your token and api key. As they are personal, DO NOT commit them.
+
 ## Dynamic importing
 
 - Add new file to manifest.json in `web_accessible_resources`
