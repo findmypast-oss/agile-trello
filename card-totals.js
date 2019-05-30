@@ -1,15 +1,42 @@
 import { trelloUi } from "./trello-ui.js";
 
+function cardListChanged(mutation) {
+  return (
+    mutation.type === "childList" &&
+    mutation.target.classList.contains("list-cards")
+  );
+}
+
+function cardChanged(mutation) {
+  return (
+    mutation.type === "childList" &&
+    mutation.target.classList.contains("list-card")
+  );
+}
+
+function cardTitleChanged(mutation) {
+  return (
+    mutation.type === "childList" &&
+    mutation.target.classList.contains("list-card-title")
+  );
+}
+
 export function updateCardTotals(changedElements) {
-  if (changedElements.classList.contains("js-list-cards")) {
+  if (cardListChanged(changedElements)) {
     // change to column
-    const cardContainer = changedElements;
+    const cardContainer = changedElements.target;
     const column = cardContainer.parentNode;
     updateTotalColumnViews(column, cardContainer);
   }
-  if (changedElements.classList.contains("list-card")) {
+  if (cardChanged(changedElements)) {
     // change to card
-    const cardContainer = changedElements.parentNode;
+    const cardContainer = changedElements.target.parentNode;
+    const column = cardContainer.parentNode;
+    updateTotalColumnViews(column, cardContainer);
+  }
+  if (cardTitleChanged(changedElements)) {
+    const cardContainer =
+      changedElements.target.parentNode.parentNode.parentNode;
     const column = cardContainer.parentNode;
     updateTotalColumnViews(column, cardContainer);
   }
@@ -68,19 +95,13 @@ function updateCardPoints({ points }) {
 }
 
 export function estimatePointsForCards(changedElements) {
-  if (
-    changedElements.type === "childList" &&
-    changedElements.target.classList.contains("list-card")
-  ) {
+  if (cardChanged(changedElements)) {
     const card = changedElements.target;
     const points = extractPoints(trelloUi.getCardTitle(card));
     displayEstimatePoints(points, card);
   }
 
-  if (
-    changedElements.type === "childList" &&
-    changedElements.target.classList.contains("list-card-title")
-  ) {
+  if (cardTitleChanged(changedElements)) {
     const card = changedElements.target.parentNode.parentNode;
     const points = extractPoints(changedElements.target.innerText);
     displayEstimatePoints(points, card);
