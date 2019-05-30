@@ -1,11 +1,8 @@
 import { trelloUrl } from "./trello-ui.js";
+import { cardLinkChanged } from "./board-events.js";
 
 export function updateCardId(changedElement) {
-  if (
-    changedElement.target.classList.contains("list-card") &&
-    changedElement.type === "attributes" &&
-    changedElement.attributeName === "href"
-  ) {
+  if (cardLinkChanged(changedElement)) {
     showCardId(changedElement.target);
   }
 }

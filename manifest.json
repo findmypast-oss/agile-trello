@@ -37,6 +37,7 @@
     "agile-trello.js",
     "card-totals.js",
     "card-age.js",
-    "card-id.js"
+    "card-id.js",
+    "board-events.js"
   ]
 }

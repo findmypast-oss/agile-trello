@@ -1,25 +1,9 @@
 import { trelloUi } from "./trello-ui.js";
-
-function cardListChanged(mutation) {
-  return (
-    mutation.type === "childList" &&
-    mutation.target.classList.contains("list-cards")
-  );
-}
-
-function cardChanged(mutation) {
-  return (
-    mutation.type === "childList" &&
-    mutation.target.classList.contains("list-card")
-  );
-}
-
-function cardTitleChanged(mutation) {
-  return (
-    mutation.type === "childList" &&
-    mutation.target.classList.contains("list-card-title")
-  );
-}
+import {
+  cardListChanged,
+  cardChanged,
+  cardTitleChanged
+} from "./board-events.js";
 
 export function updateCardTotals(changedElements) {
   if (cardListChanged(changedElements)) {
