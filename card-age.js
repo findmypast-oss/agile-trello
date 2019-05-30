@@ -12,17 +12,17 @@ export async function cardAge() {
 
     cards.forEach(card => {
       const id = trelloUrl.getCardId(card.href);
-
-      const colInfo = document.createElement("span");
-      colInfo.setAttribute(
-        "style",
-        "text-align:right;font-size: 12px;margin:10px;"
+      const daysSinceLastChange = daysBetween(
+        new Date(cardDataById[id].dateLastActivity),
+        new Date()
       );
-      colInfo.innerText =
-        "Last changed: " +
-        daysBetween(new Date(cardDataById[id].dateLastActivity), new Date()) +
-        " day(s) ago";
-      card.append(colInfo);
+
+      const cardAge = document.createElement("span");
+      cardAge.setAttribute("class", "agile-trello-card-age");
+      cardAge.innerText = `Last changed: ${daysSinceLastChange} day${
+        daysSinceLastChange === 1 ? "" : "s"
+      } ago`;
+      card.append(cardAge);
     });
   }
 }
