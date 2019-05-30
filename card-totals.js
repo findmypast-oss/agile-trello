@@ -66,24 +66,40 @@ function updateCardPoints({ points }) {
 }
 
 export function estimatePointsForCards(changedElements) {
-  if (changedElements.classList.contains("list-card")) {
-    const card = changedElements;
+  if (
+    changedElements.type === "childList" &&
+    changedElements.target.classList.contains("list-card")
+  ) {
+    const card = changedElements.target;
     const points = extractPoints(trelloUi.getCardTitle(card));
-    const cardPointsElement = card.getElementsByClassName(
-      "agile-trello-card-points"
-    )[0];
-    if (points > 0) {
-      const newCardPoints = updateCardPoints({
-        points
-      });
+    displayEstimatePoints(points, card);
+  }
 
-      if (cardPointsElement) {
-        cardPointsElement.innerText = newCardPoints.innerText;
-      } else {
-        card.getElementsByClassName("js-badges")[0].append(newCardPoints);
-      }
-    } else if (cardPointsElement) {
-      cardPointsElement.parentNode.removeChild(cardPointsElement);
+  if (
+    changedElements.type === "childList" &&
+    changedElements.target.classList.contains("list-card-title")
+  ) {
+    const card = changedElements.target.parentNode.parentNode;
+    const points = extractPoints(changedElements.target.innerText);
+    displayEstimatePoints(points, card);
+  }
+}
+
+function displayEstimatePoints(points, card) {
+  const cardPointsElement = card.getElementsByClassName(
+    "agile-trello-card-points"
+  )[0];
+
+  if (points > 0) {
+    const newCardPoints = updateCardPoints({
+      points
+    });
+    if (cardPointsElement) {
+      cardPointsElement.innerText = newCardPoints.innerText;
+    } else {
+      card.getElementsByClassName("js-badges")[0].append(newCardPoints);
     }
+  } else if (cardPointsElement) {
+    cardPointsElement.parentNode.removeChild(cardPointsElement);
   }
 }

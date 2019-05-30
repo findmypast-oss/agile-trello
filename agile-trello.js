@@ -14,7 +14,7 @@ function setupBoardObserver() {
     mutations.forEach(function(mutation) {
       updateCardId(mutation);
       updateCardTotals(mutation.target);
-      estimatePointsForCards(mutation.target);
+      estimatePointsForCards(mutation);
     });
   });
   return function observeDomChanges() {

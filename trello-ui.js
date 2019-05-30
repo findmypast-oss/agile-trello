@@ -28,8 +28,6 @@ export const trelloUrl = {
   },
 
   getCardNumber(url) {
-    // console.log("TCL: getCardNumber -> url", url);
-
     const lastUrlSegment = url.split("/").pop();
     return lastUrlSegment.substr(0, lastUrlSegment.indexOf("-"));
   }
