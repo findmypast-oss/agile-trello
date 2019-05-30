@@ -18,3 +18,8 @@
   margin-right: 10px;
   text-align: right;
 }
+.agile-trello-card-number {
+  font-size: 12px;
+  padding: 4px 0px 0px 8px;
+  font-weight: bold;
+}

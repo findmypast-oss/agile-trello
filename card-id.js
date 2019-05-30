@@ -1,9 +1,12 @@
 import { trelloUrl } from "./trello-ui.js";
 
 export function updateCardId(changedElement) {
-  if (changedElement.classList.contains("list-card")) {
-    // console.log("TCL: updateCardId -> changedElement", changedElement);
-    showCardId(changedElement);
+  if (
+    changedElement.target.classList.contains("list-card") &&
+    changedElement.type === "attributes" &&
+    changedElement.attributeName === "href"
+  ) {
+    showCardId(changedElement.target);
   }
 }
 
@@ -20,8 +23,9 @@ function showCardId(card) {
 }
 
 function cardNumberView(card) {
-  const trelloNumber = document.createElement("span");
+  const trelloNumber = document.createElement("div");
   trelloNumber.setAttribute("class", "agile-trello-card-number");
-  trelloNumber.innerText = trelloUrl.getCardNumber(card.getAttribute("href"));
+  trelloNumber.innerText =
+    "#" + trelloUrl.getCardNumber(card.getAttribute("href"));
   return trelloNumber;
 }
