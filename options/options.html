@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AgileTrello Options</title>
+  </head>
+  <body>
+    <div>
+      <p>
+        Trello token is needed so this extension can fetch further information
+        about boards and cards. It will never change any of your data.
+      </p>
+
+      <div>
+        <label>
+          Trello Token
+          <input type="text" id="token" />
+        </label>
+        <a
+          href="https://trello.com/1/authorize?expiration=never&name=AgileTrello&scope=read&response_type=token&key=38f080e1a2bac242619048df0787ee5c"
+        >
+          Get Trello Token
+        </a>
+      </div>
+    </div>
+
+    <div id="status"></div>
+    <button id="save">Save</button>
+
+    <script src="options.js"></script>
+  </body>
+</html>

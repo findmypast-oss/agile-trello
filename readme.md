@@ -47,8 +47,8 @@ See https://trello.com/app-key on how to get your token and api key. As they are
 
 ### General
 
-- [ ] Have a settings pop-up
-- [ ] Simplify Trello API login
+- [x] Have a settings pop-up (Steffi)
+- [x] Simplify Trello API login (Steffi)
 
 ### Build tools
 

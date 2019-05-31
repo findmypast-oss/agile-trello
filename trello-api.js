@@ -1,6 +1,6 @@
 const baseUrl = "https://api.trello.com";
-const token = ""; //see https://trello.com/app-key
-const apiKey = "";
+const token = window.trelloToken;
+const apiKey = "38f080e1a2bac242619048df0787ee5c";
 const authTokenParams = `key=${apiKey}&token=${token}`;
 
 export const trelloApi = {
