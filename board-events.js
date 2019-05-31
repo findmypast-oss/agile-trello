@@ -10,10 +10,18 @@ export function cardChanged(mutation) {
     mutation.target.classList.contains("list-card")
   );
 }
+
 export function cardTitleChanged(mutation) {
   return (
     mutation.type === "childList" &&
     mutation.target.classList.contains("list-card-title")
+  );
+}
+
+export function cardOpened(mutation) {
+  return (
+    mutation.type === "attributes" &&
+    mutation.target.classList.contains("card-detail-window")
   );
 }
 

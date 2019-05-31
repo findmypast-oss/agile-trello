@@ -5,7 +5,7 @@ const authTokenParams = `key=${apiKey}&token=${token}`;
 
 export const trelloApi = {
   async getAllCards(boardId) {
-    if (token !== "" && apiKey !== "") {
+    if (token !== "" && apiKey !== "" && boardId !== "") {
       const response = await fetch(
         `${baseUrl}/1/boards/${boardId}/cards?${authTokenParams}`
       );

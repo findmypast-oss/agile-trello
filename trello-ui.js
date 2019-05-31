@@ -20,11 +20,15 @@ export const trelloUi = {
 
 export const trelloUrl = {
   getBoardId(url) {
-    return /https:\/\/trello.com\/b\/([A-Za-z0-9]+)\/\S+/.exec(url)[1];
+    const regexMatch = /https:\/\/trello.com\/b\/([A-Za-z0-9]+)\/\S+/.exec(url);
+    if (regexMatch) return regexMatch[1];
+    return "";
   },
 
   getCardId(url) {
-    return /https:\/\/trello.com\/c\/([A-Za-z0-9]+)\/\S+/.exec(url)[1];
+    const regexMatch = /https:\/\/trello.com\/c\/([A-Za-z0-9]+)\/\S+/.exec(url);
+    if (regexMatch) return regexMatch[1];
+    return "";
   },
 
   getCardNumber(url) {
