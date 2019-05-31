@@ -35,7 +35,8 @@ See https://trello.com/app-key on how to get your token and api key. As they are
 - [ ] Display points on card <- still needs to hide the points in the title. (Toby)
 - [ ] Story limit per column highlight with colour e.g. red if over or under limits, orange if on limit
 - [x] Age of card from when it was moved/created (Steffi)
-- [ ] Update age of card after initial load
+- [x] Update age of card after initial load (Steffi)
+- [ ] Update card age if it changes 'out of sight' (e.g. checklist is changed in another browser)
 - [ ] When changing to another board the Agile Trello stats are not visible/created
 
 ### Card is open

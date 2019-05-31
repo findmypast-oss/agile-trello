@@ -14,5 +14,17 @@ export const trelloApi = {
       }
     }
     return [];
+  },
+
+  async getCardDetails(cardId) {
+    if (token !== "" && apiKey !== "") {
+      const response = await fetch(
+        `${baseUrl}/1/cards/${cardId}?${authTokenParams}`
+      );
+      if (response.status === 200) {
+        return await response.json();
+      }
+    }
+    return {};
   }
 };

@@ -1,7 +1,19 @@
 import { trelloUi, trelloUrl } from "./trello-ui.js";
 import { trelloApi } from "./trello-api.js";
+import { cardChanged } from "./board-events.js";
 
-export async function cardAge() {
+export async function cardAge(changedElements) {
+  if (cardChanged(changedElements)) {
+    const card = changedElements.target;
+    const cardId = trelloUrl.getCardId(card.href);
+    const cardData = await trelloApi.getCardDetails(cardId);
+    if (cardData != {}) {
+      updateCardWithAge(card, cardData.dateLastActivity);
+    }
+  }
+}
+
+async function updateAllCardsOnBoard() {
   const boardId = trelloUrl.getBoardId(window.location.toString());
   const cardData = await trelloApi.getAllCards(boardId);
 
@@ -12,18 +24,31 @@ export async function cardAge() {
 
     cards.forEach(card => {
       const id = trelloUrl.getCardId(card.href);
-      const daysSinceLastChange = daysBetween(
-        new Date(cardDataById[id].dateLastActivity),
-        new Date()
-      );
-
-      const cardAge = document.createElement("span");
-      cardAge.setAttribute("class", "agile-trello-card-age");
-      cardAge.innerText = `Last changed: ${daysSinceLastChange} day${
-        daysSinceLastChange === 1 ? "" : "s"
-      } ago`;
-      card.append(cardAge);
+      updateCardWithAge(card, cardDataById[id].dateLastActivity);
     });
+  }
+}
+
+function updateCardWithAge(cardElement, cardLastActivity) {
+  const daysSinceLastChange = daysBetween(
+    new Date(cardLastActivity),
+    new Date()
+  );
+
+  const cardAgeNode = cardElement.getElementsByClassName(
+    "agile-trello-card-age"
+  )[0];
+
+  const newCardAgeNode = document.createElement("span");
+  newCardAgeNode.setAttribute("class", "agile-trello-card-age");
+  newCardAgeNode.innerText = `Last changed: ${daysSinceLastChange} day${
+    daysSinceLastChange === 1 ? "" : "s"
+  } ago`;
+
+  if (cardAgeNode) {
+    cardAgeNode.innerText = newCardAgeNode.innerText;
+  } else {
+    cardElement.append(newCardAgeNode);
   }
 }
 

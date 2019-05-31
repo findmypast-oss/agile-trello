@@ -2,12 +2,6 @@ import { updateCardTotals, estimatePointsForCards } from "./card-totals.js";
 import { cardAge } from "./card-age.js";
 import { updateCardId } from "./card-id.js";
 
-document.onreadystatechange = function() {
-  if (document.readyState === "complete") {
-    setTimeout(cardAge, 2000);
-  }
-};
-
 setupBoardObserver()();
 function setupBoardObserver() {
   const mutationObserver = new MutationObserver(function(mutations) {
@@ -15,6 +9,7 @@ function setupBoardObserver() {
       updateCardId(mutation);
       updateCardTotals(mutation);
       estimatePointsForCards(mutation);
+      cardAge(mutation);
     });
   });
   return function observeDomChanges() {
