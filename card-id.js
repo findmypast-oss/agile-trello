@@ -1,5 +1,9 @@
 import { trelloUrl } from "./trello-ui.js";
-import { cardLinkChanged, cardOpened } from "./board-events.js";
+import {
+  cardLinkChanged,
+  cardOpened,
+  cardOpenedAlready
+} from "./board-events.js";
 
 export function updateCardId(changedElement) {
   if (cardLinkChanged(changedElement)) {
@@ -10,6 +14,12 @@ export function updateCardId(changedElement) {
 export function showOpenCardId(changedElement) {
   if (cardOpened(changedElement)) {
     addOpenCardId(changedElement.target);
+  }
+  if (cardOpenedAlready(changedElement)) {
+    const cardAlreadyOpen = document.getElementsByClassName(
+      "card-detail-window"
+    )[0];
+    if (cardAlreadyOpen) addOpenCardId(cardAlreadyOpen);
   }
 }
 

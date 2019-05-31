@@ -25,6 +25,13 @@ export function cardOpened(mutation) {
   );
 }
 
+export function cardOpenedAlready(mutation) {
+  return (
+    mutation.type === "childList" &&
+    mutation.target.classList.contains("window-module")
+  );
+}
+
 export function cardLinkChanged(changedElement) {
   return (
     changedElement.target.classList.contains("list-card") &&
