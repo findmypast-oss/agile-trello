@@ -19,3 +19,9 @@ chrome.storage.sync.get(
     head.insertBefore(globals, head.lastChild);
   }
 );
+
+chrome.runtime.onMessage.addListener(function(request, sender, _sendResponse) {
+  var event = new CustomEvent("agile-popup-form", { detail: request });
+
+  document.body.dispatchEvent(event);
+});

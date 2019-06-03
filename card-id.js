@@ -5,6 +5,17 @@ import {
   cardOpenedAlready
 } from "./board-events.js";
 
+document.body.addEventListener(
+  "agile-popup-form",
+  function(e) {
+    console.log("agile-popup-form EVENT: ", e.detail);
+    document.querySelectorAll(".agile-trello-card-number").forEach(element => {
+      element.setAttribute("style", `color: ${e.detail.primary}`);
+    });
+  },
+  false
+);
+
 export function updateCardId(changedElement) {
   if (cardLinkChanged(changedElement)) {
     showCardId(changedElement.target);

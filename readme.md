@@ -32,23 +32,27 @@ See https://trello.com/app-key on how to get your token and api key. As they are
 - [x] Logo/icon for extension (Laura)
 - [x] Show card number (Richard and Laura)
 - [x] When a story point has changed on a card update all the totals (column and card points) (Richard)
-- [ ] Display points on card <- still needs to hide the points in the title. (Toby)
-- [ ] Story limit per column highlight with colour e.g. red if over or under limits, orange if on limit
 - [x] Age of card from when it was moved/created (Steffi)
 - [x] Update age of card after initial load (Steffi)
+- [ ] Story limit per column highlight with colour e.g. red if over or under limits, orange if on limit
 - [ ] Update card age if it changes 'out of sight' (e.g. checklist is changed in another browser)
 - [ ] When changing to another board the Agile Trello stats are not visible/created
 
 ### Card is open
 
 - [ ] List of buttons story points (_Fib numbers_)
-- [ ] Show card number near title <- **TO FIX:** _does not work page reloads on open card_ (Richard & Laura)
+- [ ] Display points on card <- still needs to hide the points in the title. (Toby)
+- [x] Show card number near title <- **TO FIX:** _does not work page reloads on open card_ (Richard & Laura)
 - [ ] If card has links to other cards in checklist, show sum of all the points
 
 ### General
 
 - [x] Have a settings pop-up (Steffi)
 - [x] Simplify Trello API login (Steffi)
+
+### Customise
+
+- [ ] Custom colour for card ids via popup (Richard)
 
 ### Build tools
 

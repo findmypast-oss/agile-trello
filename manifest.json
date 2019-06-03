@@ -13,8 +13,8 @@
     "page": "options/options.html",
     "open_in_tab": false
   },
-  "page_action": {
-    "default_popup": "popup.html",
+  "browser_action": {
+    "default_popup": "popup/popup.html",
     "default_icon": {
       "16": "images/agile-trello16.png",
       "32": "images/agile-trello32.png",
