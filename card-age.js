@@ -35,6 +35,8 @@ function updateCardWithAge(cardElement, cardLastActivity) {
     new Date()
   );
 
+  if (isNaN(daysSinceLastChange)) return;
+
   const cardAgeNode = cardElement.getElementsByClassName(
     "agile-trello-card-age"
   )[0];
