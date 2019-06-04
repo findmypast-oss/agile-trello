@@ -104,7 +104,9 @@ function displayEstimatePoints(points, card) {
     if (cardPointsElement) {
       cardPointsElement.innerText = newCardPoints.innerText;
     } else {
-      card.getElementsByClassName("js-badges")[0].append(newCardPoints);
+      card
+        .getElementsByClassName("js-custom-field-badges")[0]
+        .append(newCardPoints);
     }
   } else if (cardPointsElement) {
     cardPointsElement.parentNode.removeChild(cardPointsElement);

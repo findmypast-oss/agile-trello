@@ -41,7 +41,8 @@ See https://trello.com/app-key on how to get your token and api key. As they are
 ### Card is open
 
 - [ ] List of buttons story points (_Fib numbers_)
-- [ ] Display points on card <- still needs to hide the points in the title. (Toby)
+- [ ] Display points on card <- **Fix** needs to hide the points in the title. (Toby)
+- [x] **Fix** story points disappearing (Richard)
 - [x] Show card number near title <- **TO FIX:** _does not work page reloads on open card_ (Richard & Laura)
 - [ ] If card has links to other cards in checklist, show sum of all the points
 
