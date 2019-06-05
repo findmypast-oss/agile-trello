@@ -2,14 +2,45 @@ import { trelloUi, trelloUrl } from "./trello-ui.js";
 import { trelloApi } from "./trello-api.js";
 import { cardChanged } from "./board-events.js";
 
-export async function cardAge(changedElements) {
-  if (cardChanged(changedElements)) {
+export function clearCurrentBoardIdFromLocalStorage() {
+  const boardId = trelloUrl.getBoardId(window.location.toString());
+  localStorage.removeItem(boardId);
+}
+
+export function cardAge(changedElements) {
+  const boardId = trelloUrl.getBoardId(window.location.toString());
+  const boardLastFetched = localStorage.getItem(boardId);
+  const timeSinceLastBoardFetch =
+    new Date().getTime() - new Date(boardLastFetched).getTime();
+
+  if (!boardLastFetched) {
+    // if we don't have the board id yet, fetch all the cards in one call
+    localStorage.setItem(boardId, new Date());
+    updateAllCardsOnBoard();
+  } else if (
+    cardChanged(changedElements) &&
+    //botch to ignore the initial page load mutation events
+    timeSinceLastBoardFetch > 3000
+  ) {
     const card = changedElements.target;
     const cardId = trelloUrl.getCardId(card.href);
+    updateCard(card, cardId);
+  }
+}
+
+async function updateCard(card, cardId) {
+  const lastActivity = localStorage.getItem(cardId);
+
+  // we either don't have the lastActivity in localStorage, or it's more than
+  // a day old
+  if (!lastActivity || daysBetween(new Date(lastActivity), new Date()) > 0) {
     const cardData = await trelloApi.getCardDetails(cardId);
-    if (cardData != {}) {
+    if (cardData != {} && cardData.dateLastActivity) {
+      localStorage.setItem(cardId, cardData.dateLastActivity);
       updateCardWithAge(card, cardData.dateLastActivity);
     }
+  } else if (lastActivity) {
+    updateCardWithAge(card, lastActivity);
   }
 }
 
@@ -24,7 +55,11 @@ async function updateAllCardsOnBoard() {
 
     cards.forEach(card => {
       const id = trelloUrl.getCardId(card.href);
-      updateCardWithAge(card, cardDataById[id].dateLastActivity);
+      if (cardDataById[id]) {
+        const lastActivity = cardDataById[id].dateLastActivity;
+        localStorage.setItem(id, lastActivity);
+        updateCardWithAge(card, lastActivity);
+      }
     });
   }
 }

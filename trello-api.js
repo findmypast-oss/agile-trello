@@ -17,7 +17,7 @@ export const trelloApi = {
   },
 
   async getCardDetails(cardId) {
-    if (token !== "" && apiKey !== "") {
+    if (cardId && token !== "" && apiKey !== "") {
       const response = await fetch(
         `${baseUrl}/1/cards/${cardId}?${authTokenParams}`
       );

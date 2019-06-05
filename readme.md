@@ -45,11 +45,14 @@ See https://trello.com/app-key on how to get your token and api key. As they are
 - [x] **Fix** story points disappearing (Richard)
 - [x] Show card number near title <- **TO FIX:** _does not work page reloads on open card_ (Richard & Laura)
 - [ ] If card has links to other cards in checklist, show sum of all the points
+- [ ] When converting a checklist item to a card, add a link to the new card to the list
 
 ### General
 
 - [x] Have a settings pop-up (Steffi)
 - [x] Simplify Trello API login (Steffi)
+- [x] Reduce number of (unnecessary) API calls made
+- [ ] Add some simple caching to API (Steffi)
 
 ### Customise
 
