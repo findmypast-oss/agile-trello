@@ -34,14 +34,15 @@ See https://trello.com/app-key on how to get your token and api key. As they are
 - [x] When a story point has changed on a card update all the totals (column and card points) (Richard)
 - [x] Age of card from when it was moved/created (Steffi)
 - [x] Update age of card after initial load (Steffi)
+- [ ] Display points on card <- **Fix** needs to hide the points in the title. (Toby)
 - [ ] Story limit per column highlight with colour e.g. red if over or under limits, orange if on limit
 - [ ] Update card age if it changes 'out of sight' (e.g. checklist is changed in another browser)
 - [ ] When changing to another board the Agile Trello stats are not visible/created
+- [ ] Allow selection of 'focus' columns for API heavy features e.g. card age only on backlog/refined/doing/review/done
 
 ### Card is open
 
 - [ ] List of buttons story points (_Fib numbers_)
-- [ ] Display points on card <- **Fix** needs to hide the points in the title. (Toby)
 - [x] **Fix** story points disappearing (Richard)
 - [x] Show card number near title <- **TO FIX:** _does not work page reloads on open card_ (Richard & Laura)
 - [ ] If card has links to other cards in checklist, show sum of all the points
