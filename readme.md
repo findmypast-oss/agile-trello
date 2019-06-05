@@ -17,7 +17,7 @@ See https://trello.com/app-key on how to get your token and api key. As they are
 ## Dynamic importing
 
 - Add new file to manifest.json in `web_accessible_resources`
-- Import using `import { nameOfFunc } from './random-file.js'` **important of end with file extension**
+- Import using `import { nameOfFunc } from './random-file.js'` **important to end with file extension**
 
 ## Features:
 
@@ -60,3 +60,10 @@ See https://trello.com/app-key on how to get your token and api key. As they are
 To publish on the chrome extension store a zip file of the app needs to be uploaded. Read more about [publishing](https://developer.chrome.com/webstore/publish)
 
 - [ ] Create a script to zip files for upload to chrome store maybe use [ADM-ZIP](https://www.npmjs.com/package/adm-zip)
+
+### [Provide store content](https://developer.chrome.com/webstore/publish#provide-store-content)
+
+- [x] 128 x 128 app icon (Laura)
+- [ ] Create screenshots/video to show off what the app does (Laura)
+- [ ] Write a detailed description
+- [ ] 440 x 280 small tile icon for Web Store wall (Laura)
