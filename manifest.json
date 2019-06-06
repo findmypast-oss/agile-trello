@@ -42,6 +42,7 @@
     "card-totals.js",
     "card-age.js",
     "card-id.js",
-    "board-events.js"
+    "board-events.js",
+    "cache.js"
   ]
 }
