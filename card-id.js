@@ -10,7 +10,13 @@ document.body.addEventListener(
   function(e) {
     console.log("agile-popup-form EVENT: ", e.detail);
     document.querySelectorAll(".agile-trello-card-number").forEach(element => {
-      element.setAttribute("style", `color: ${e.detail.primary}`);
+      element.setAttribute("style", `color: ${e.detail.idForeground}`);
+    });
+    document.querySelectorAll(".agile-trello-card-points").forEach(element => {
+      element.setAttribute(
+        "style",
+        `background-color: ${e.detail.pointsBackground}`
+      );
     });
   },
   false

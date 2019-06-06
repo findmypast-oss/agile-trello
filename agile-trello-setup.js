@@ -21,7 +21,10 @@ chrome.storage.sync.get(
 );
 
 chrome.runtime.onMessage.addListener(function(request, sender, _sendResponse) {
-  var event = new CustomEvent("agile-popup-form", { detail: request });
-
-  document.body.dispatchEvent(event);
+  configChanged(request);
 });
+
+function configChanged(request) {
+  var event = new CustomEvent("agile-popup-form", { detail: request });
+  document.body.dispatchEvent(event);
+}
