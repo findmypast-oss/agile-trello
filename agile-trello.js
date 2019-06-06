@@ -1,8 +1,7 @@
 import { updateCardTotals, estimatePointsForCards } from "./card-totals.js";
-import { cardAge, clearCurrentBoardIdFromLocalStorage } from "./card-age.js";
+import { cardAge } from "./card-age.js";
 import { updateCardId, showOpenCardId } from "./card-id.js";
 
-clearCurrentBoardIdFromLocalStorage();
 setupBoardObserver()();
 function setupBoardObserver() {
   const mutationObserver = new MutationObserver(function(mutations) {
