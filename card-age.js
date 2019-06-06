@@ -2,6 +2,11 @@ import { trelloUi, trelloUrl } from "./trello-ui.js";
 import { trelloApi } from "./trello-api.js";
 import { cardChanged } from "./board-events.js";
 
+export async function fetchAllBoardData() {
+  const boardId = trelloUrl.getBoardId(window.location.toString());
+  await trelloApi.getAllCards(boardId);
+}
+
 export function cardAge(changedElements) {
   const boardId = trelloUrl.getBoardId(window.location.toString());
   const boardLastFetched = localStorage.getItem(boardId);

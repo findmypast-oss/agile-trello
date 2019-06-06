@@ -42,8 +42,14 @@ export const trelloApi = {
             data: data,
             lastFetched: new Date()
           });
-          if (data.cards) {
-          }
+
+          data.map(card => {
+            setObjectInLocalStorage(`card_${card.shortLink}`, {
+              data: card,
+              lastFetched: new Date()
+            });
+          });
+
           return data;
         }
       }
@@ -57,7 +63,7 @@ export const trelloApi = {
       const timeDiff = storedCard
         ? msSinceLastFetch(storedCard.lastFetched)
         : 0;
-      if (storedCard && timeDiff < 10000) {
+      if (storedCard && timeDiff < 30000) {
         return storedCard.data;
       } else {
         const response = await fetch(
