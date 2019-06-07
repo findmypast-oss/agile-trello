@@ -1,6 +1,7 @@
 import { trelloUi, trelloUrl } from "./trello-ui.js";
 import { trelloApi } from "./trello-api.js";
 import { cardChanged } from "./board-events.js";
+import { daysSince } from "./util/time.js";
 
 export async function fetchAllBoardData() {
   const boardId = trelloUrl.getBoardId(window.location.toString());
@@ -42,10 +43,7 @@ async function updateAllCardsOnBoard() {
 }
 
 function updateCardWithAge(cardElement, cardLastActivity) {
-  const daysSinceLastChange = daysBetween(
-    new Date(cardLastActivity),
-    new Date()
-  );
+  const daysSinceLastChange = daysSince(new Date(cardLastActivity));
 
   if (isNaN(daysSinceLastChange)) return;
 
@@ -64,10 +62,4 @@ function updateCardWithAge(cardElement, cardLastActivity) {
   } else {
     cardElement.append(newCardAgeNode);
   }
-}
-
-function daysBetween(date1, date2) {
-  var oneDay = 1000 * 60 * 60 * 24;
-  var diff = date2.getTime() - date1.getTime();
-  return Math.round(diff / oneDay);
 }

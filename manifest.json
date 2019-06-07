@@ -43,6 +43,7 @@
     "card-age.js",
     "card-id.js",
     "board-events.js",
-    "cache.js"
+    "util/cache.js",
+    "util/time.js"
   ]
 }

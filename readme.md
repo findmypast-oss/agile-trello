@@ -36,7 +36,7 @@ See https://trello.com/app-key on how to get your token and api key. As they are
 - [x] Update age of card after initial load (Steffi)
 - [ ] Display points on card <- **Fix** needs to hide the points in the title. (Toby)
 - [ ] Story limit per column highlight with colour e.g. red if over or under limits, orange if on limit
-- [ ] Update card age if it changes 'out of sight' (e.g. checklist is changed in another browser)
+- [ ] Update card age if card changes 'out of sight' (e.g. checklist is changed in another browser)
 - [ ] When changing to another board the Agile Trello stats are not visible/created
 - [ ] Allow selection of 'focus' columns for API heavy features e.g. card age only on backlog/refined/doing/review/done
 
@@ -53,7 +53,8 @@ See https://trello.com/app-key on how to get your token and api key. As they are
 - [x] Have a settings pop-up (Steffi)
 - [x] Simplify Trello API login (Steffi)
 - [x] Reduce number of (unnecessary) API calls made
-- [ ] Add some simple caching to API (Steffi)
+- [x] Add some simple caching to API (Steffi)
+- [ ] Put all options in one place
 
 ### Customise
 

@@ -1,17 +1,10 @@
+import cache from "./util/cache.js";
+import time from "./util/time.js";
+
 const baseUrl = "https://api.trello.com";
 const token = window.trelloToken;
 const apiKey = "38f080e1a2bac242619048df0787ee5c";
 const authTokenParams = `key=${apiKey}&token=${token}`;
-
-import cache from "./cache.js";
-
-function diffInMs(date1, date2) {
-  return Math.abs(new Date(date1).getTime() - new Date(date2).getTime());
-}
-
-function msSinceLastFetch(date) {
-  return diffInMs(date, new Date());
-}
 
 export const trelloApi = {
   async getAllCards(boardId) {
@@ -19,7 +12,7 @@ export const trelloApi = {
       const storedBoard = cache.getObject(`board_${boardId}`);
 
       const timeDiff = storedBoard
-        ? msSinceLastFetch(storedBoard.lastFetched)
+        ? time.millisecondsSince(storedBoard.lastFetched)
         : 0;
       if (storedBoard && timeDiff < 10000) {
         return storedBoard.data;
@@ -52,7 +45,7 @@ export const trelloApi = {
     if (cardId && token !== "" && apiKey !== "" && cardId) {
       const storedCard = cache.getObject(`card_${cardId}`);
       const timeDiff = storedCard
-        ? msSinceLastFetch(storedCard.lastFetched)
+        ? time.millisecondsSince(storedCard.lastFetched)
         : 0;
       if (storedCard && timeDiff < 30000) {
         return storedCard.data;
