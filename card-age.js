@@ -8,20 +8,7 @@ export async function fetchAllBoardData() {
 }
 
 export function cardAge(changedElements) {
-  const boardId = trelloUrl.getBoardId(window.location.toString());
-  const boardLastFetched = localStorage.getItem(boardId);
-  const timeSinceLastBoardFetch =
-    new Date().getTime() - new Date(boardLastFetched).getTime();
-
-  if (!boardLastFetched) {
-    // if we don't have the board id yet, fetch all the cards in one call
-    localStorage.setItem(boardId, new Date());
-    updateAllCardsOnBoard();
-  } else if (
-    cardChanged(changedElements) &&
-    //botch to ignore the initial page load mutation events
-    timeSinceLastBoardFetch > 3000
-  ) {
+  if (cardChanged(changedElements)) {
     const card = changedElements.target;
     const cardId = trelloUrl.getCardId(card.href);
     updateCard(card, cardId);
@@ -29,18 +16,9 @@ export function cardAge(changedElements) {
 }
 
 async function updateCard(card, cardId) {
-  const lastActivity = localStorage.getItem(cardId);
-
-  // we either don't have the lastActivity in localStorage, or it's more than
-  // a day old
-  if (!lastActivity || daysBetween(new Date(lastActivity), new Date()) > 0) {
-    const cardData = await trelloApi.getCardDetails(cardId);
-    if (cardData != {} && cardData.dateLastActivity) {
-      localStorage.setItem(cardId, cardData.dateLastActivity);
-      updateCardWithAge(card, cardData.dateLastActivity);
-    }
-  } else if (lastActivity) {
-    updateCardWithAge(card, lastActivity);
+  const cardData = await trelloApi.getCardDetails(cardId);
+  if (cardData != {} && cardData.dateLastActivity) {
+    updateCardWithAge(card, cardData.dateLastActivity);
   }
 }
 
@@ -57,7 +35,6 @@ async function updateAllCardsOnBoard() {
       const id = trelloUrl.getCardId(card.href);
       if (cardDataById[id]) {
         const lastActivity = cardDataById[id].dateLastActivity;
-        localStorage.setItem(id, lastActivity);
         updateCardWithAge(card, lastActivity);
       }
     });
