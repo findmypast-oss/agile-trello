@@ -24,7 +24,8 @@ function getFormValues(formElement) {
     let agileConfig = new FormData(formElement);
     return {
       idForeground: agileConfig.get("idForeground"),
-      pointsBackground: agileConfig.get("pointsBackground")
+      pointsBackground: agileConfig.get("pointsBackground"),
+      trelloToken: agileConfig.get("trelloToken")
     };
   }
   return null;
@@ -40,9 +41,23 @@ function setFormValues(formElement, values) {
 }
 
 function getSavedValues(fn) {
-  chrome.storage.sync.get(["idForeground", "pointsBackground"], fn);
+  chrome.storage.sync.get(
+    ["idForeground", "pointsBackground", "trelloToken"],
+    fn
+  );
 }
 
-function saveValues({ idForeground, pointsBackground }) {
-  chrome.storage.sync.set({ idForeground, pointsBackground });
+function updateStatus() {
+  var status = document.getElementById("status");
+  status.textContent = "Options saved.";
+  setTimeout(function() {
+    status.textContent = "";
+  }, 2000);
+}
+
+function saveValues({ idForeground, pointsBackground, trelloToken }) {
+  chrome.storage.sync.set(
+    { idForeground, pointsBackground, trelloToken },
+    updateStatus
+  );
 }
