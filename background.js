@@ -15,3 +15,11 @@ function run(tab) {
 function extensionApp() {
   console.log("Extension: ");
 }
+
+// onCompleted event does not work...
+chrome.webNavigation.onHistoryStateUpdated.addListener(
+  e => {
+    chrome.tabs.sendMessage(e.tabId, { action: "historyChange" });
+  },
+  { url: [{ hostSuffix: "trello.com", pathContains: "/b/" }] }
+);

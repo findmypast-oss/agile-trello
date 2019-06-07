@@ -2,8 +2,17 @@ import { updateCardTotals, estimatePointsForCards } from "./card-totals.js";
 import { cardAge, fetchAllBoardData } from "./card-age.js";
 import { updateCardId, showOpenCardId } from "./card-id.js";
 
-fetchAllBoardData();
-setupBoardObserver()();
+document.body.addEventListener("board-change", function(e) {
+  console.log("board-change EVENT: ", e.detail);
+  startUp();
+});
+
+function startUp() {
+  fetchAllBoardData();
+  setupBoardObserver()();
+}
+
+startUp();
 function setupBoardObserver() {
   const mutationObserver = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {

@@ -4,7 +4,13 @@
   "version": "1.0",
   "description": "All the handy Trello plugins in one",
   "manifest_version": 2,
-  "permissions": ["tabs", "https://trello.com/*", "storage", "activeTab"],
+  "permissions": [
+    "tabs",
+    "https://trello.com/*",
+    "storage",
+    "activeTab",
+    "webNavigation"
+  ],
   "background": {
     "scripts": ["background.js"],
     "persistent": false
