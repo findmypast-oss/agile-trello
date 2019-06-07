@@ -54,7 +54,7 @@ See https://trello.com/app-key on how to get your token and api key. As they are
 - [x] Simplify Trello API login (Steffi)
 - [x] Reduce number of (unnecessary) API calls made
 - [x] Add some simple caching to API (Steffi)
-- [ ] Put all options in one place
+- [x] Put all options in one place
 
 ### Customise
 
