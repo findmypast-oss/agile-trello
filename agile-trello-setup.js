@@ -22,16 +22,18 @@ chrome.storage.sync.get(
 
 chrome.runtime.onMessage.addListener(function(request, sender, _sendResponse) {
   if (request.action === "historyChange") {
-    //TODO event fires multiple times when navigating to new URL, ideally we only want to
-    // send one CustomEvent per board switch
     boardChanged();
   } else {
     configChanged(request);
   }
 });
 
+let lastHistoryChangeFired;
 function boardChanged() {
-  document.body.dispatchEvent(new CustomEvent("board-change", {}));
+  if (!lastHistoryChangeFired || new Date() - lastHistoryChangeFired > 500) {
+    lastHistoryChangeFired = new Date();
+    document.body.dispatchEvent(new CustomEvent("board-change", {}));
+  }
 }
 
 function configChanged(request) {
